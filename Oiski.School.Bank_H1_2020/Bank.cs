@@ -33,7 +33,7 @@ namespace Oiski.School.Bank_H1_2020
         public string Name { get; }
         public decimal TotalCredit { get; internal set; } = 0;
 
-        public bool Transaction(int _accountNumber, decimal _amount, bool _deposit = true)
+        public bool Transaction (int _accountNumber, decimal _amount, bool _deposit = true)
         {
             BankAccount account = accounts.Find(acc => acc.AccountNumber == _accountNumber);
 
@@ -45,15 +45,38 @@ namespace Oiski.School.Bank_H1_2020
             return account.Withdraw(_amount);
         }
 
-        public BankAccount CreateAccount(string _name)
+        public BankAccount CreateAccount (AccType _type, string _name)
         {
-            BankAccount newAccount = new BankAccount(_name);
+            BankAccount newAccount = null;
+            switch ( _type )
+            {
+                case AccType.SalaryAccount:
+                    newAccount = new SalaryAccount(_name);
+                    break;
+                case AccType.SavingsAccount:
+                    newAccount = new SavingsAccount(_name);
+                    break;
+                case AccType.OverdraftAccount:
+                    newAccount = new OverdraftAccount(_name);
+                    break;
+                default:
+                    break;
+            }
+
             AddAccount(newAccount);
             AccountCount++;
             return newAccount;
         }
 
-        public bool AddAccount(BankAccount _account)
+        public void CalculateInterest ()
+        {
+            foreach ( BankAccount acc in accounts )
+            {
+                acc.CalculateInterest();
+            }
+        }
+
+        public bool AddAccount (BankAccount _account)
         {
             if ( accounts.Find(acc => acc.AccountNumber == _account.AccountNumber) == null )
             {
@@ -64,7 +87,7 @@ namespace Oiski.School.Bank_H1_2020
             return false;
         }
 
-        public bool RemoveAccount(BankAccount _account)
+        public bool RemoveAccount (BankAccount _account)
         {
             if ( accounts.Find(acc => acc.AccountNumber == _account.AccountNumber) != null )
             {
@@ -75,7 +98,7 @@ namespace Oiski.School.Bank_H1_2020
             return false;
         }
 
-        public string Status()
+        public string Status ()
         {
             StringBuilder builder = new StringBuilder();
 
@@ -89,7 +112,7 @@ namespace Oiski.School.Bank_H1_2020
             return $"{header}\n{builder}\n{totalCredit}";
         }
 
-        private Bank(string _name, decimal _totalCredit)
+        private Bank (string _name, decimal _totalCredit)
         {
             Name = _name;
             TotalCredit = _totalCredit;
