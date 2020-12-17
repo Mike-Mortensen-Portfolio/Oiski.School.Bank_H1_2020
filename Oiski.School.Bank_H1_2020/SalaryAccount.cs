@@ -8,7 +8,7 @@ namespace Oiski.School.Bank_H1_2020
     {
         public override void CalculateInterest ()
         {
-            Balance = ( Balance * .5M ) + Balance;
+            Balance = ( Balance * .05M ) + Balance;
         }
 
         /// <summary>

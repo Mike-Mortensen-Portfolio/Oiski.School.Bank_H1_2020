@@ -10,15 +10,15 @@ namespace Oiski.School.Bank_H1_2020
         {
             if ( Balance < 50000 )
             {
-                Balance = ( Balance * 1M ) + Balance;
+                Balance = ( Balance * 0.01M ) + Balance;
             }
             else if ( Balance >= 50000 && Balance < 100000 )
             {
-                Balance = ( Balance * 2M ) + Balance;
+                Balance = ( Balance * 0.02M ) + Balance;
             }
             else if ( Balance >= 100000 )
             {
-                Balance = ( Balance * 3M ) + Balance;
+                Balance = ( Balance * 0.03M ) + Balance;
             }
         }
 
