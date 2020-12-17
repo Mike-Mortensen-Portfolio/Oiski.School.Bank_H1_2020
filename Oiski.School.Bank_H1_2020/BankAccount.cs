@@ -21,7 +21,6 @@
         {
             if ( _amount >= 0 )
             {
-                Bank.Instance.TotalCredit += _amount;
                 Balance += _amount;
                 return true;
             }
@@ -38,7 +37,6 @@
         {
             if ( _amount >= 0 )
             {
-                Bank.Instance.TotalCredit -= _amount;
                 Balance -= _amount;
 
                 return true;
@@ -49,18 +47,13 @@
 
         public abstract void CalculateInterest ();
 
-        public void Test ()
-        {
-
-        }
-
         /// <summary>
         /// 
         /// </summary>
         /// <returns>A formated <see langword="string"/> that represents the <see cref="BankAccount"/></returns>
         public override string ToString ()
         {
-            return $"{Name}: {string.Format("{0,35}", $"{Balance:C}")}";
+            return $"{Name} ({AccountNumber}):\t\t\t {Balance:C}";
         }
 
         /// <summary>

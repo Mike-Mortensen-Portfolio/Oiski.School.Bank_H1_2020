@@ -52,7 +52,7 @@ namespace Oiski.School.Bank_H1_2020
         public bool Transaction (int _accountNumber, decimal _amount, bool _deposit = true)
         {
             BankAccount account = accounts.Find(acc => acc.AccountNumber == _accountNumber);
-            
+
             if ( account == null )
             {
                 return false;
@@ -102,10 +102,16 @@ namespace Oiski.School.Bank_H1_2020
             {
                 acc.CalculateInterest();
             }
-            SalaryAccount ACC = new SalaryAccount("Some Sick name");
+        }
 
-            ACC.
-
+        /// <summary>
+        /// Find a <see cref="BankAccount"/> in the <see cref="Bank"/>s collection
+        /// </summary>
+        /// <param name="_accountNumber"></param>
+        /// <returns>The first occurence where the account number equals <paramref name="_accountNumber"/>. If no instance is found this returns <see langword="null"/></returns>
+        public BankAccount FindAccount (int _accountNumber)
+        {
+            return accounts.Find(acc => acc.AccountNumber == _accountNumber);
         }
 
         /// <summary>
@@ -146,16 +152,17 @@ namespace Oiski.School.Bank_H1_2020
         /// <returns>A formated <see langword="string"/> that contains information about the <see cref="Bank"/>s collection of <see cref="BankAccount"/>s and the <see cref="Bank"/>s total credit</returns>
         public string Status ()
         {
+            TotalCredit = 0;
             StringBuilder builder = new StringBuilder();
 
             foreach ( BankAccount acc in accounts )
             {
                 builder.AppendLine($"{acc}");
+                TotalCredit += acc.Balance;
             }
 
-            string header = $"*************Welcome To {Name}*************";
-            string totalCredit = $"Total Credit: {string.Format("{0,35}", $"{TotalCredit:C}")}";
-            return $"{header}\n{builder}\n{totalCredit}";
+            string totalCredit = $"Total Credit:\t\t\t\t{TotalCredit:C}";
+            return $"{builder}\n{totalCredit}";
         }
 
         /// <summary>
