@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oiski.School.Bank_H1_2020", "Oiski.School.Bank_H1_2020.csproj", "{4FB37176-5592-4491-AF37-3D713048D6EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oiski.School.Bank_H1_2020", "Oiski.School.Bank_H1_2020.csproj", "{4FB37176-5592-4491-AF37-3D713048D6EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oiski.School.Bank_H1_2020.Application", "..\Oiski.School.Bank_H1_2020.Application\Oiski.School.Bank_H1_2020.Application.csproj", "{52CB2CD2-F084-4910-A927-AD0265652DA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{4FB37176-5592-4491-AF37-3D713048D6EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FB37176-5592-4491-AF37-3D713048D6EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FB37176-5592-4491-AF37-3D713048D6EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52CB2CD2-F084-4910-A927-AD0265652DA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52CB2CD2-F084-4910-A927-AD0265652DA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52CB2CD2-F084-4910-A927-AD0265652DA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52CB2CD2-F084-4910-A927-AD0265652DA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

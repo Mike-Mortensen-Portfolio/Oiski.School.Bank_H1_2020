@@ -22,6 +22,10 @@ namespace Oiski.School.Bank_H1_2020
             }
         }
 
+        /// <summary>
+        /// Creates a new instance of type <see cref="SavingsAccount"/> where the name of the <see cref="BankAccount"/> is set
+        /// </summary>
+        /// <param name="_name"></param>
         public SavingsAccount (string _name) : base(_name)
         {
         }

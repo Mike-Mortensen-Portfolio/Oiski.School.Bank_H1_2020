@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Oiski.School.Bank_H1_2020
 {
+    /// <summary>
+    /// Represents the <see cref="Bank"/> itself
+    /// </summary>
     public class Bank
     {
         private static Bank instance = null;
@@ -21,21 +24,39 @@ namespace Oiski.School.Bank_H1_2020
         }
 
         private readonly List<BankAccount> accounts;
-        public IReadOnlyList<BankAccount> GetAccoutns
+        /// <summary>
+        /// Returns all current <see cref="BankAccount"/>s in the <see cref="Bank"/>s collection as a <see cref="IReadOnlyList{T}"/> where <strong>T</strong> is of type <see cref="BankAccount"/>
+        /// </summary>
+        public IReadOnlyList<BankAccount> GetAccounts
         {
             get
             {
                 return accounts;
             }
         }
+        /// <summary>
+        /// The current amount of <see cref="BankAccount"/>s created at any point. (<i>This is increments everytime a new <see cref="BankAccount"/> is created</i>)
+        /// </summary>
         public int AccountCount { get; private set; }
 
         public string Name { get; }
         public decimal TotalCredit { get; internal set; } = 0;
 
+        /// <summary>
+        /// Perform a transaction on a <see cref="BankAccount"/> based on the <paramref name="_accountNumber"/>
+        /// </summary>
+        /// <param name="_accountNumber"></param>
+        /// <param name="_amount"></param>
+        /// <param name="_deposit">Whether or not to depost <paramref name="_amount"/> or withdraw it</param>
+        /// <returns><see langword="true"/> if the transaction was successful; Otherwise <see langword="false"/></returns>
         public bool Transaction (int _accountNumber, decimal _amount, bool _deposit = true)
         {
             BankAccount account = accounts.Find(acc => acc.AccountNumber == _accountNumber);
+            
+            if ( account == null )
+            {
+                return false;
+            }
 
             if ( _deposit )
             {
@@ -45,6 +66,12 @@ namespace Oiski.School.Bank_H1_2020
             return account.Withdraw(_amount);
         }
 
+        /// <summary>
+        /// Create a new <see cref="BankAccount"/> based on <paramref name="_type"/>
+        /// </summary>
+        /// <param name="_type"></param>
+        /// <param name="_name"></param>
+        /// <returns>A new instance of <see cref="BankAccount"/> where the name is set</returns>
         public BankAccount CreateAccount (AccType _type, string _name)
         {
             BankAccount newAccount = null;
@@ -59,8 +86,6 @@ namespace Oiski.School.Bank_H1_2020
                 case AccType.OverdraftAccount:
                     newAccount = new OverdraftAccount(_name);
                     break;
-                default:
-                    break;
             }
 
             AddAccount(newAccount);
@@ -68,14 +93,26 @@ namespace Oiski.School.Bank_H1_2020
             return newAccount;
         }
 
+        /// <summary>
+        /// Calculates the interest on each <see cref="BankAccount"/> in the <see cref="Bank"/>s collection
+        /// </summary>
         public void CalculateInterest ()
         {
             foreach ( BankAccount acc in accounts )
             {
                 acc.CalculateInterest();
             }
+            SalaryAccount ACC = new SalaryAccount("Some Sick name");
+
+            ACC.
+
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_account"></param>
+        /// <returns><see langword="true"/> if an account could be added; Otherwise <see langword="false"/></returns>
         public bool AddAccount (BankAccount _account)
         {
             if ( accounts.Find(acc => acc.AccountNumber == _account.AccountNumber) == null )
@@ -87,6 +124,11 @@ namespace Oiski.School.Bank_H1_2020
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_account"></param>
+        /// <returns><see langword="true"/> if an account could be removed; Otherwise <see langword="false"/></returns>
         public bool RemoveAccount (BankAccount _account)
         {
             if ( accounts.Find(acc => acc.AccountNumber == _account.AccountNumber) != null )
@@ -98,6 +140,10 @@ namespace Oiski.School.Bank_H1_2020
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>A formated <see langword="string"/> that contains information about the <see cref="Bank"/>s collection of <see cref="BankAccount"/>s and the <see cref="Bank"/>s total credit</returns>
         public string Status ()
         {
             StringBuilder builder = new StringBuilder();
@@ -112,6 +158,11 @@ namespace Oiski.School.Bank_H1_2020
             return $"{header}\n{builder}\n{totalCredit}";
         }
 
+        /// <summary>
+        /// Creates a new instance of type <see cref="Bank"/> where the name and initial total credit is set
+        /// </summary>
+        /// <param name="_name"></param>
+        /// <param name="_totalCredit"></param>
         private Bank (string _name, decimal _totalCredit)
         {
             Name = _name;
