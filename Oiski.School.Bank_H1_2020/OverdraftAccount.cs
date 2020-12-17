@@ -10,7 +10,7 @@ namespace Oiski.School.Bank_H1_2020
         {
             if ( Balance >= 0 )
             {
-                Balance = ( Balance * .5M ) + Balance
+                Balance = ( Balance * .5M ) + Balance;
             }
             else
             {
